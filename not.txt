@@ -1,0 +1,258 @@
+https://getbootstrap.com/docs/5.3/getting-started/introduction/   - Bootstrap link
+
+
+created a react page + output first page Then details of projects
+CSS	https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css   link
+
+JS	https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js script
+ 
+
+these above link are linked
+
+created inside the src two folders
+components
+pages
+
+step : 1
+then create inside the src > pages
+ Moviedetails.jsx
+ MovieList.jsx 
+ Pagenotfound.jsx
+ search.jsx
+
+step 2:
+ then create src> components
+ card.jsx
+ footer.jsx
+ header.jsx
+
+step 3:
+ the output is from app.jsx >> so, more contents are want to load this is make issue while loading. So>>
+ inside the pages > create index.js file >> this file inside we export all details of pages
+ like this files >>>  Moviedetails.jsx
+ MovieList.jsx 
+ Pagenotfound.jsx
+ search.jsx >>>
+ export {MovieDetails} from "./MovieDetails";
+export {MovieList} from "./MovieList";
+export {PageNotFound} from "./PageNotFound";
+export {Search} from "./Search";  >>>
+
+This same method use components also...
+
+step 4:
+i want to all routes are in single files
+so,>> create inside >> src >> > foler - routes >>> All routes.jsx >>
+
+we want to include routes go to main.jsx >> remove <StrictMode>  </StrictMode> >>next open terminal then type below
+npm i react-router-dom -- this is for <StrictMode> replace this to  </StrictMode> >>> <browserrouter>  </browserrouter>
+ 
+ then do browserRouter component then import above
+ import {BrowserRouter} from 'react-router-dom';
+
+ step 5:
+ Allroutes.jsx >> empty fragment >> inside the return >> create >this is want to create > routes > this is inside want to create> route --- > this is we can give stand alone tag.. 
+
+
+      <Route path= "/"  elements={<MovieList />}/>
+ path= "/" - initially want to empty >> elements is movielist component then we want to import when the movielis is have pages folder so we want to import pages folder
+
+ import {Route, Routes} from "react-router-dom"; this line also want to import
+
+step 6 :
+Then go to app.jsx for inclueds the allrouter.jsx or all router file for show output
+  <div>
+        <Header />
+        <Allroutes />
+        <Footer />
+      </div>  add this and case sensitive is main & import this files also >>
+     
+      import {Route, Routes} from "react-router-dom";
+import MovieList from "../pages/MovieList";
+
+one error is occur. Because the default export. in this place we change all files into index so we don't use default export. we want to use export directly
+
+const Card = () => {
+  return (
+    <div>
+      
+    </div>
+  )
+}
+
+export default Card; 
+we want to change this model 
+export const Card = () => {
+  return (
+    <div>
+      
+    </div>
+  )
+} this is correct for in this case . All components also want to change this type.. also the pages folder files want to change ..
+fix all error
+step 7: 
+create navbar in components>>inside>> header > crated using bootstrap class and create by 
+a tag brand name MovieHunt >>
+created nav details 
+moviehunt brand and home,top rated, popular & upcomming and search...
+
+then create one button for responsive... above the collapse div
+
+i want to google fonts. get embeded code and import the app.css file then *{
+  font-family:inter;
+}
+then set body minimum height. Because, not have content it wil close. so, prevent this we set the minimum height for body.
+then give padding top also for body then go to footer..
+
+Step 7:
+create footer then go to allrouter.jsx >> 
+give title inside element>movielist  >title> then >>
+      <Route  elements={<MovieList title="Your Guide to Great Movies" />} />
+create new route for top rated movies..and popular & upcomming,..like etc create how many you want
+ <Routes>
+      <Route path="/" elements={<MovieList title="Your Guide to Great Movies" />} />
+      <Route path="movies/popular" elements={<MovieList title="Popular Movies" />} />
+      <Route path="movies/top" elements={<MovieList title="Top Rated Movies" />} />
+      <Route path="movies/upcomming" elements={<MovieList title="Upcomming Movies" />} />
+    </Routes> these all are completed and go to MoviesList to want to show the output
+  
+  Step 8:
+  we use useEffect in this moviesList 
+  to assign title to useEffect get from props of MovieList.
+
+  debug __> eslint.config.js >> "react/prop-types":"off"; But i don't need this line..
+
+  then go to link these above route to a tag in header 
+
+    Step 9: 
+    This all are do in header.jsx...below...
+    one important think that is every click page is refresh this is not need refresh. That is have one solution that is a tag is changed to navlink & href change to to="" 
+import { NavLink } from "react-router-dom"; this line is important to add before 
+    vip : one important think that is we want to use anything before we want tot import this..
+     NavLink is also same as  <a> tag but NavLink have more advantage..
+
+     Step 10:
+     create welcome banner --> go to MovieList ---> then after create banner and button
+     button name is explore now --> that is hook new method to open upcomming movies...
+
+     step 11:
+     create card design go to components >> card.jsx
+import backup from "../assets/backup.png"; import this line for image...
+dummy image for card 
+>> then create card descriptions
+
+use link tag link tag is from reat-router-dom... this Link use alternatively by the <a> tag
+>> we want to rating >> create i tag >> 
+
+          <small>
+            <i className="bi bi-star-fill"></i> this code for star
+          </small>
+
+
+step 12:
+
+card size is big. So, we want to control the size by css styling..>> go to app.css >>>
+
+------------------------
+step 13: 
+go to fetch api real time data...
+create .env file on the project next save the below for hook because, hook is use more places.
+VITE_API_KEY="c45c7eb18c47272757b1717d2de051fe" >>
+then create hooks folder inside the src >> thne create the usefetch.jsx >>
+
+entha api ku entha link kudukanum enru oru option irukku. So, athukaka namma api path i oru property
+ya get pannidalaam..
+
+important : 
+
+    const url = "https://api.themoviedb.org/3"
+    >>> we give path
+    const url = `https://api.themoviedb.org/3/${apiPath}`;
+    >>> we give api key
+    const url = `https://api.themoviedb.org/3/${apiPath}/${key}`;
+    >>> while the user used the search parameter that place we use query parameter..
+    const url = `https://api.themoviedb.org/3/${apiPath}/${key}&query=${queryTerm}`;
+
+step 14: 
+set api path in the allroutes>>routes >>
+
+put the api path to the allroutes >> to see get to the movielist.jsx >> then get data url from usefetch url..
+   inside useFetch: 
+    export const useFetch = ({apiPath, queryTerm = "" }) wrong
+   export const useFetch = (apiPath, queryTerm = "" ) corrected
+
+
+    const url = `https://api.themoviedb.org/3/${apiPath}/${key}&query=${queryTerm}`; wrong
+
+    const url = `https://api.themoviedb.org/3/${apiPath}?${key}&query=${queryTerm}`; corrected
+
+
+this is wrong code :
+
+{/**
+  This is my wrong code : ---
+  import React, { useEffect, useState } from 'react'
+ export const useFetch = (apiPath, queryTerm = "" ) => {
+  return (
+    const [data, setData] = useState([apiPath]);
+    const key = import.meta.env.VITE_API_KEY;
+    
+    const url = `https://api.themoviedb.org/3/${apiPath}?${key}&query=${queryTerm}`;
+    useEffect(()=>{
+        async function fetchMovies() {
+            fetch(url).then((res) => res.json())
+            .then((jsonData) => (jsonData.results));
+        }
+        fetchMovies();
+    },[url])
+  )
+  return {data};
+}
+
+**/} in use fetch.jsx
+
+
+all steps are completed for include images also.
+
+-------------------------------------
+start add fetures :
+
+clear bug:- 
+while click home like,, mouse want to up
+
+new movie detail component :
+-------------------------
+full movie details while click :
+create route for all routes.jsx
+next go to card function
+to={`/movie/${id}`} this two attribute. So, two curly bracis..
+
+
+&query=${queryTerm} - no need search Term
+
+
+
+--------------------------------
+utils function for conver hours 
+for movieDetails runtime util function
+
+
+
+------------------
+Search : 
+first create route 
+then import all form movielist
+
+
+export const Header = () => {
+  const navigator = useNavigate();
+  const handleSearch = (e)=>{
+    e.preventDefault();
+    const queryTerm = e.target.search.value;
+    e.target.reset();
+    return navigator(`/Search?1=${queryTerm}`)
+  }; program in header
+
+  ------------------
+  we want to create page not found..
+  create empty route
